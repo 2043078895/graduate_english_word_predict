@@ -22,14 +22,6 @@ class MYLSTM:
         self.save_path=saved_path
         if not os.path.exists(saved_path):
             self.LSTM_model=Sequential()
-#            self.LSTM_model.add(Dense(10,input_shape=(co_size,),kernel_regularizer=regularizers.l2(0.00001),activation='relu'))
-#            self.LSTM_model.add(Dropout(0.8))
-#            self.LSTM_model.add(BatchNormalization())
-#            self.LSTM_model.add(Dense(8,kernel_regularizer=regularizers.l2(0.00001),activation='relu'))
-#            self.LSTM_model.add(Dropout(0.8))            
-#            self.LSTM_model.add(Dense(5,kernel_regularizer=regularizers.l2(0.00001),activation='relu'))
-#            self.LSTM_model.add(Dropout(0.8))
-            
             self.LSTM_model.add(Masking(mask_value= -1,input_shape=(time_step,co_size)))
             self.LSTM_model.add(GRU(256,input_shape=(time_step,co_size),kernel_regularizer=regularizers.l2(0.01),dropout=0.8,return_sequences=True))#添加LSTM层                                
             self.LSTM_model.add(BatchNormalization())
